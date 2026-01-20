@@ -1,0 +1,68 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="#05090d"></rect>
+
+  <!-- Glow Filter -->
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+      <feMerge>
+        <feMergeNode in="blur"></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Particle Cloud -->
+  <g fill="#33eaff" filter="url(#glow)" opacity="0.9">
+    <!-- Left cluster -->
+    <circle cx="140" cy="256" r="2"></circle>
+    <circle cx="150" cy="230" r="1.5"></circle>
+    <circle cx="160" cy="280" r="1.8"></circle>
+    <circle cx="170" cy="250" r="1.2"></circle>
+    <circle cx="155" cy="260" r="1.6"></circle>
+
+    <!-- Right cluster -->
+    <circle cx="372" cy="256" r="2"></circle>
+    <circle cx="360" cy="230" r="1.5"></circle>
+    <circle cx="350" cy="280" r="1.8"></circle>
+    <circle cx="340" cy="250" r="1.2"></circle>
+    <circle cx="355" cy="260" r="1.6"></circle>
+
+    <!-- Top cluster -->
+    <circle cx="256" cy="130" r="2"></circle>
+    <circle cx="230" cy="150" r="1.5"></circle>
+    <circle cx="280" cy="160" r="1.8"></circle>
+    <circle cx="250" cy="170" r="1.2"></circle>
+
+    <!-- Bottom cluster -->
+    <circle cx="256" cy="382" r="2"></circle>
+    <circle cx="230" cy="360" r="1.5"></circle>
+    <circle cx="280" cy="350" r="1.8"></circle>
+    <circle cx="250" cy="340" r="1.2"></circle>
+  </g>
+
+  <!-- Central Satellite Shape -->
+  <g stroke="#33eaff" stroke-width="2" fill="none" filter="url(#glow)">
+    <rect x="236" y="236" width="40" height="40"></rect>
+    <rect x="190" y="246" width="36" height="20"></rect>
+    <rect x="286" y="246" width="36" height="20"></rect>
+    <ellipse cx="256" cy="300" rx="22" ry="8"></ellipse>
+  </g>
+
+  <!-- HUD Corner Brackets -->
+  <g stroke="#33eaff" stroke-width="2" opacity="0.7">
+    <path d="M40 80 V40 H80"></path>
+    <path d="M472 80 V40 H432"></path>
+    <path d="M40 432 V472 H80"></path>
+    <path d="M472 432 V472 H432"></path>
+  </g>
+
+  <!-- Target Cross -->
+  <g stroke="#33eaff" stroke-width="1" opacity="0.6">
+    <line x1="256" y1="240" x2="256" y2="272"></line>
+    <line x1="240" y1="256" x2="272" y2="256"></line>
+  </g>
+
+</svg>

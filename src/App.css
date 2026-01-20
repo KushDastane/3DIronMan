@@ -1,0 +1,144 @@
+body {
+  background-color: #000;
+}
+
+/* Scanline Animation for Tailwind UI */
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes pulse-cyan {
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+  }
+}
+
+.hud-panel {
+  background: rgba(0, 30, 45, 0.05);
+  backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.03);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hud-panel:hover {
+  background: rgba(0, 30, 45, 0.1);
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: inset 0 0 25px rgba(0, 212, 255, 0.08);
+}
+
+.hud-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #00d4ff;
+  pointer-events: none;
+}
+
+.corner-tl {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.corner-tr {
+  top: -1px;
+  right: -1px;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.corner-bl {
+  bottom: -1px;
+  left: -1px;
+  border-right: 0;
+  border-top: 0;
+}
+
+.corner-br {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.technical-label {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(0, 212, 255, 0.6);
+  font-size: 0.6rem;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  padding-bottom: 2px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.hud-button {
+  background: rgba(0, 40, 60, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  color: #00d4ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 7px;
+  /* Even smaller for mobile */
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  /* Tighter for mobile */
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .hud-button {
+    font-size: 10px;
+    padding: 8px 16px;
+  }
+}
+
+.hud-button:hover {
+  background: rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.hud-button-red {
+  background: rgba(60, 10, 10, 0.3);
+  border: 1px solid rgba(255, 50, 50, 0.4);
+  color: #ff3232;
+}
+
+.hud-button-red:hover {
+  background: rgba(255, 50, 50, 0.2);
+  box-shadow: 0 0 15px rgba(255, 50, 50, 0.4);
+}
+
+.user-mode-tag {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
+  padding: 2px 8px;
+  font-size: 10px;
+  border-radius: 2px;
+  animation: pulse-cyan 2s infinite;
+}
