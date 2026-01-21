@@ -403,34 +403,44 @@ export default function App() {
 
       {/* Actions HUD - Positioned left, above model info to avoid camera overlap */}
       <div className="absolute bottom-28 left-3 md:bottom-32 md:left-12 z-[100] flex flex-col gap-1 md:gap-4 items-start">
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleUpload}
+          accept=".glb,.gltf"
+          className="hidden"
+        />
+
         {appMode === 'showcase' ? (
-          <>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleUpload}
-              accept=".glb,.gltf"
-              className="hidden"
-            />
-            <button
-              onClick={() => fileInputRef.current.click()}
-              className="hud-button flex flex-col md:flex-row items-start md:items-center gap-0.5 md:gap-2 group whitespace-nowrap"
-            >
-              <div className="hud-corner corner-tl" />
-              <div className="hud-corner corner-br" />
-              <span className="text-[8px] md:text-[11px]">Upload Model</span>
-              <span className="opacity-40 group-hover:opacity-100 transition-opacity text-[6px] md:text-[8px] -mt-0.5 md:mt-0">[.GLB]</span>
-            </button>
-          </>
-        ) : (
           <button
-            onClick={handleExit}
-            className="hud-button hud-button-red flex items-center gap-1.5 whitespace-nowrap"
+            onClick={() => fileInputRef.current.click()}
+            className="hud-button flex flex-col md:flex-row items-start md:items-center gap-0.5 md:gap-2 group whitespace-nowrap"
           >
             <div className="hud-corner corner-tl" />
             <div className="hud-corner corner-br" />
-            <span className="text-[8px] md:text-[11px]">Exit to Showcase</span>
+            <span className="text-[8px] md:text-[11px]">Upload Model</span>
+            <span className="opacity-40 group-hover:opacity-100 transition-opacity text-[6px] md:text-[8px] -mt-0.5 md:mt-0">[.GLB]</span>
           </button>
+        ) : (
+          <>
+            <button
+              onClick={() => fileInputRef.current.click()}
+              className="hud-button flex items-center gap-1.5 whitespace-nowrap"
+            >
+              <div className="hud-corner corner-tl" />
+              <div className="hud-corner corner-br" />
+              <span className="text-[8px] md:text-[11px]">Upload Another</span>
+              <span className="opacity-40 group-hover:opacity-100 transition-opacity text-[6px] md:text-[8px]">[.GLB]</span>
+            </button>
+            <button
+              onClick={handleExit}
+              className="hud-button hud-button-red flex items-center gap-1.5 whitespace-nowrap"
+            >
+              <div className="hud-corner corner-tl" />
+              <div className="hud-corner corner-br" />
+              <span className="text-[8px] md:text-[11px]">Exit to Showcase</span>
+            </button>
+          </>
         )}
       </div>
 
@@ -459,7 +469,7 @@ export default function App() {
             text="ROTATE 3D USING FIST"
           />
           <GuideItem
-            icon={<div className="flex gap-1 text-cyan-400 transition-colors"><FaHandSparkles className="scale-x-[-1]"/><FaHandSparkles  /></div>}
+            icon={<div className="flex gap-1 text-cyan-400 transition-colors"><FaHandSparkles className="scale-x-[-1]" /><FaHandSparkles /></div>}
             text="ZOOM IN/OUT (BOTH HANDS)"
           />
           <GuideItem
