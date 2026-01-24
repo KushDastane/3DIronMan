@@ -430,7 +430,7 @@ export default function App() {
               <div className="hud-corner corner-tl" />
               <div className="hud-corner corner-br" />
               <span className="text-[8px] md:text-[11px]">Upload Another</span>
-              <span className="opacity-40 group-hover:opacity-100 transition-opacity text-[6px] md:text-[8px]">[.GLB]</span>
+              <span className="opacity-40 group-hover:opacity-100 transition-opacity text-[6px] hidden md:block md:text-[8px]">[.GLB]</span>
             </button>
             <button
               onClick={handleExit}
