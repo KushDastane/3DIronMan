@@ -385,7 +385,7 @@ export default function App() {
             {currentModel}
           </div>
           {appMode === 'user' && (
-            <div className="user-mode-tag uppercase font-black tracking-tighter !text-[6px] md:!text-[10px]">
+            <div className="hidden md:block user-mode-tag uppercase font-black tracking-tighter md:text-[10px]">
               Isolated Mode
             </div>
           )}
@@ -438,7 +438,7 @@ export default function App() {
             >
               <div className="hud-corner corner-tl" />
               <div className="hud-corner corner-br" />
-              <span className="text-[8px] md:text-[11px]">Exit to Showcase</span>
+              <span className="text-[6px] md:text-[11px]">Exit to Showcase</span>
             </button>
           </>
         )}
