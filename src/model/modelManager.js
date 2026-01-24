@@ -17,14 +17,15 @@ export class ModelManager {
      * STRICT: Start with car.glb ONLY
      */
     async init() {
-        // List of available models - restricted for stability first
+        // List of available models - ordered by size/reliability
+        // Note: psitol.glb is 8.8MB and may load slowly
         this.models = [
-            '/mechanical.glb',
-            '/Satellite.glb',
-            '/psitol.glb',
-            '/sparrow.glb',
-            '/car.glb',
-            '/dinosaur.glb',
+            '/mechanical.glb',    // 388KB - reliable
+            '/Satellite.glb',     // 174KB - reliable
+            '/car.glb',           // 307KB - reliable
+            '/dinosaur.glb',      // 286KB - reliable
+            '/sparrow.glb',       // 1.1MB - medium
+            '/psitol.glb',        // 8.8MB - large, may be slow
         ];
 
         this.userModel = null;

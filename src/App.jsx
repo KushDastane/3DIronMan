@@ -150,17 +150,27 @@ export default function App() {
       if (appMode === 'user') return;
 
       const isRight = direction === 'RIGHT';
-      setGestureHint(isRight ? 'Prev Model' : 'Next Model');
+      const loadingMsg = isRight ? '← Loading Prev...' : 'Loading Next →';
+      setGestureHint(loadingMsg);
 
-      const modelData = isRight
-        ? await modelManagerRef.current.prevModel()
-        : await modelManagerRef.current.nextModel();
+      try {
+        const modelData = isRight
+          ? await modelManagerRef.current.prevModel()
+          : await modelManagerRef.current.nextModel();
 
-      if (modelData) {
-        sceneRendererRef.current.setModel(modelData);
-        transformRef.current = { rotation: { x: 0, y: 0 }, scale: 1, isLocked: false };
-        setCurrentModel(modelManagerRef.current.getCurrentModelName());
-        setTimeout(() => setGestureHint('~ Kush Dastane'), 1000);
+        if (modelData) {
+          sceneRendererRef.current.setModel(modelData);
+          transformRef.current = { rotation: { x: 0, y: 0 }, scale: 1, isLocked: false };
+          setCurrentModel(modelManagerRef.current.getCurrentModelName());
+          setTimeout(() => setGestureHint('~ Kush Dastane'), 1000);
+        } else {
+          setGestureHint('Model failed to load');
+          setTimeout(() => setGestureHint(''), 2000);
+        }
+      } catch (error) {
+        console.error('Model switching error:', error);
+        setGestureHint('⚠ Loading failed');
+        setTimeout(() => setGestureHint(''), 2000);
       }
     });
 
