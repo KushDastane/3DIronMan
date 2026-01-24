@@ -24,8 +24,7 @@ export class ModelManager {
             '/Satellite.glb',     // 174KB - reliable
             '/car.glb',           // 307KB - reliable
             '/dinosaur.glb',      // 286KB - reliable
-            '/sparrow.glb',       // 1.1MB - medium
-            '/psitol.glb',        // 8.8MB - large, may be slow
+
         ];
 
         this.userModel = null;
