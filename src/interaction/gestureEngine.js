@@ -13,6 +13,10 @@ export class GestureEngine {
         this.rotationDamping = 0.05;
         this.zoomDamping = 0.02;
         this.eventCallbacks = {};
+
+        // Stabilization
+        this.gestureBuffer = [];
+        this.bufferSize = 3;
     }
 
     /**
@@ -169,6 +173,19 @@ export class GestureEngine {
 
         // 3. Interaction (Fist/Point) -> Rotate Only
         if (gesture === 'fist' || gesture === 'point') {
+            // Buffer the gesture for stabilization
+            this.gestureBuffer.push(gesture);
+            if (this.gestureBuffer.length > this.bufferSize) this.gestureBuffer.shift();
+
+            // Only proceed if we have a stable gesture (same for N frames)
+            const isStable = this.gestureBuffer.length >= this.bufferSize &&
+                this.gestureBuffer.every(g => g === gesture);
+
+            if (!isStable) {
+                this.lastHandPosition = null;
+                return;
+            }
+
             if (this.lastHandPosition === null) {
                 this.lastHandPosition = { x: indexTip.x, y: indexTip.y, startX: indexTip.x, startY: indexTip.y };
                 this.gestureStartTime = Date.now();
@@ -186,11 +203,20 @@ export class GestureEngine {
             const elapsed = Date.now() - this.gestureStartTime;
 
             // 2. Rotation
-            if (elapsed > 50) {
+            if (elapsed > 100) { // Increased delay for stability
                 this.state = 'rotating';
 
-                const deltaX = currentX - this.lastHandPosition.x;
-                const deltaY = currentY - this.lastHandPosition.y;
+                let deltaX = currentX - this.lastHandPosition.x;
+                let deltaY = currentY - this.lastHandPosition.y;
+
+                // DELTA CLAMPING: Ignore massive jumps (usually tracking errors)
+                const maxAllowedDelta = 0.15;
+                if (Math.abs(deltaX) > maxAllowedDelta || Math.abs(deltaY) > maxAllowedDelta) {
+                    // Reset position to current to "swallow" the jump, but don't emit
+                    this.lastHandPosition.x = currentX;
+                    this.lastHandPosition.y = currentY;
+                    return;
+                }
 
                 this.emit('rotate', {
                     deltaX: deltaX * 2.5,
@@ -213,6 +239,7 @@ export class GestureEngine {
             this.lastHandPosition.y = currentY;
             // Keep startX/startY stable for total delta calculation
         } else {
+            this.gestureBuffer = []; // Clear buffer on gesture change
             this.resetState();
         }
     }
