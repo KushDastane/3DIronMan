@@ -167,12 +167,15 @@ export class GestureEngine {
                     this.switchCooldown = Date.now();
                     this.state = 'switching';
                 }
-                return; // Stop processing (no rotation while switching)
+                // ALWAYS return when pointing - don't allow rotation with point gesture
+                return;
             }
+            // If pointing but not horizontal, also return to prevent rotation
+            return;
         }
 
-        // 3. Interaction (Fist/Point) -> Rotate Only
-        if (gesture === 'fist' || gesture === 'point') {
+        // 3. Rotation (Fist ONLY) -> Prevents conflict with pointing gestures
+        if (gesture === 'fist') {
             // Buffer the gesture for stabilization
             this.gestureBuffer.push(gesture);
             if (this.gestureBuffer.length > this.bufferSize) this.gestureBuffer.shift();
